@@ -1,0 +1,22 @@
+include "config.path"
+thread = 8
+
+cpath = "./cservice/?.so"
+bootstrap = "snlua bootstrap"
+
+start = "main"
+harbor = 1
+
+
+logger = nil
+logpath = "."
+address = "127.0.0.1:2526"
+master = "127.0.0.1:2013"
+standalone = "0.0.0.0:2013"
+
+
+--houtai mode
+--daemon = "./skynet.pid"
+--logger = "./userlog"
+
+node = "node1"

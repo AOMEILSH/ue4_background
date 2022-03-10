@@ -1,0 +1,4 @@
+lualoader = "./lualib/loader.lua"
+lurservice = "./service/?.lua;".."./service/?/init.lua;"
+lua_path = "./etc/?.lua;".."./lualib/?.lua;"
+lua_cpath = "./luaclib/?.so;"

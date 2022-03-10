@@ -1,0 +1,42 @@
+syntax = "proto2";
+package unattended;
+message Foot_traffic {
+	required int32 in_num = 1;
+	required int32 out_num = 2;
+	optional string trend = 3;
+}
+message Access_record {
+	required int32 record_id = 1;
+	required string id = 2;
+	optional string monitor_video = 3; 
+	optional string kind = 4;
+	optional string in_out = 5; 
+}
+
+message Last_ten_people_records{
+	repeated  Access_record records = 1;
+}
+
+message Parking_space{
+	required string space_id = 1;
+	required int32 is_empty = 2;
+	optional string car_id = 3;
+	optional int32 parking_time = 4;
+}
+
+message Parking_spaces_messages{
+	required int32 space_num = 1;
+	required int32 empty_num = 2;
+	repeated Parking_space messages = 3;
+	
+}
+
+message Date_parking_traffic{
+	required string date = 1;
+	required int32 car_in = 2;
+	required int32 car_out = 3;
+}
+
+message Last_ten_traffic_records{
+	repeated Date_parking_traffic records = 1;
+}

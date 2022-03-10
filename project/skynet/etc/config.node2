@@ -1,0 +1,17 @@
+thread = 8
+cpath = "./cservice/?.so"
+bootstrap = "snlua bootstrap"
+
+start = "main"
+harbor = 1
+
+lualoader = "./lualib/loader.lua"
+lurservice = "~/project/service/?.lua;".."~/project/service/?/init.lua;".."./service/?.lua"
+lua_path = "~/project/etc/?.lua;".."~/project/lualib/?.lua;".."./lualib/?.lua;".."./lualib/?/init.lua"
+lua_cpath = "~/project/luaclib/?.so;".."./luaclib/?.so"
+
+--houtai mode
+--daemon = "./skynet.pid"
+--logger = "./userlog"
+
+node = "node2"
