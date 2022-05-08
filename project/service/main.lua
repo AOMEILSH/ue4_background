@@ -49,5 +49,13 @@ skynet.start(function()
 		skynet.name("unattended",srv)
 		skynet.error(unode)
 	end
+
+	--smart_management系统开启
+	local smnode = runconfig.smartmanagement.node
+	if mynode == smnode then
+	        local srv = skynet.newservice("smartmanagement","smartmanagement",0)
+                skynet.name("smartmanagement",srv)
+                skynet.error(smnode)	
+	end
         skynet.exit()
 end)

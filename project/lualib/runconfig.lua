@@ -6,6 +6,8 @@ return {
 	
 	agentmgr = {node = "node1"},
 	unattended = {node = "node1"},
+	smartmanagement = {node = "node1"},
+	smartlive = {node = "node1"},
 	scene = {
 	node1 = {1001,1002},
 	--node2 = {1003},

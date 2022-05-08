@@ -1,0 +1,121 @@
+syntax = "proto2";
+package smart_management;
+
+message get_wet_temp_record {
+	required string record_id = 1;
+	optional int32 id = 2;
+	optional string time = 3;
+	optional int32 tempature = 4;
+	optional int32 wet = 5;
+
+}
+message get_ten_wet_temp_records{
+ 	repeated get_wet_temp_record records = 1;
+}
+
+message get_camera_record {
+	
+	required string record_id  = 1;
+	optional int32 id = 2;
+	optional string place = 3;
+	optional string kind = 4;
+	optional string time  = 5;
+	optional string video_address = 6;
+}
+
+message get_ten_camera_records{
+	repeated get_camera_record records = 1;
+
+}
+
+message get_smoke_record{
+	required string record_id = 1;
+	optional int32 id = 2;
+	optional string time = 3;
+	optional int32 smoke_data = 4;
+}
+
+message get_ten_smoke_records{
+	repeated get_smoke_record records = 1; 
+
+}
+
+message get_rescue_platform_record{
+	required string name = 1;
+	optional string place = 2;
+	optional string status = 3;
+	optional string time = 4;
+}
+
+message get_ten_rescue_platform_records{
+	repeated get_rescue_platform_record records = 1; 
+}
+
+message get_theft_against_record{
+	required string source = 1;
+	optional string info = 2;
+	optional string time = 3;
+}
+message get_ten_theft_against_records{
+	repeated get_theft_against_record records = 1;
+}
+
+message get_property_guarantee_record{
+	required string owner = 1;
+	optional string info = 2;
+	optional string time = 3;
+}
+
+message get_ten_property_guarantee_records{
+	repeated get_property_guarantee_record records = 1; 
+}
+
+message get_police_service_record{
+	required string type_data = 1;
+	optional string time = 2;
+	optional int32 place = 3;
+}
+
+message get_ten_police_service_records
+{
+	repeated get_police_service_record records = 1; 
+}
+
+message get_fire_control_record{
+	required int32 id = 1;
+	optional string equipment_address = 2;
+	optional string kind = 3;
+	optional string time  = 4;
+}
+
+message get_ten_fire_control_records {
+	repeated get_fire_control_record records = 1;
+}
+
+
+message get_elevator_record{
+	required string record_id = 1;
+	optional int32 id = 2;
+	optional string kind = 3;
+	optional string elevator_address = 4;
+	optional string video_address = 5;
+	optional string time = 6;
+}
+
+message get_ten_elevator_records{
+	repeated get_elevator_record records = 1;
+}
+
+message get_equipment_record{
+	required string record_id = 1;
+	optional int32 id = 2;
+	optional string status = 3;
+	optional string place = 4;
+	optional string time = 5;
+}
+
+message get_comfort_service_record{
+	required string alarm = 1;
+	optional int32 temp = 2;
+	optional int32 wet = 3;
+}

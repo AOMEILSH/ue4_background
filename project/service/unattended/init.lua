@@ -3,6 +3,9 @@ local skynet = require "skynet"
 local s = require "service"
 local mysql = require "skynet.db.mysql"
 local pb = require "protobuf"
+require "astar"
+require "parkinglothandler"
+
 local db = nil
 -- 五分钟内的人流（出和入）
 local fivemin_in = 0
@@ -15,6 +18,10 @@ local car_out = 0
 local all_parking_spaces = nil
 local used_parking_spaces = nil
 
+--记存停车场地图，以及实现寻路算法
+local handler1 = ParkingLotHandler()--第一层停车位
+local astar = AStar(handler1)
+local parking_car = {}
 function s.init()
 	        pb.register_file("./proto/unattended.pb")
 		s.connect()
@@ -139,26 +146,71 @@ s.resp.get_unattended_car_record = function(source, playerid)
 end
 
 
--- 获取当前空闲车位和总车位(还没写proto)
+-- 获取当前空闲车位和总车位和停车位数据(还没写proto)
 s.resp.get_parking_spaces_info = function(source, playerid)
 	local msg = {}
 	msg.all_parking_spaces = all_parking_spaces
 	msg.used_parking_spaces = used_parking_spaces
+	 msg.parkinglot_info = handler1:getMaps()
 	local result = pb.encode("unattended.Parking_spaces_info",msg)
 	return result
 end
 
--- 获取停车位相关数据（还没写proto）
 
+-- 获取最近车位路径（寻路）
+s.resp.get_nearest_parkinglot = function(source,playerid,from)
+	local msg = {}
+	
+			
+end
+--获取某个车位的信息(没写proto)
+s.resp.get_parking_car_info = function(source,playerid,floor,i,j)
+	if parking_car[floor]  == nil or parking_car[floor][i] == nil or parking_car[i][j] == nil then
+		return "empty"
+	end
+	local msg = {}
+	msg.id = parking_car[floor][i][j][id]
+	msg.time = os.time() - parking_car[floor][i][j][time]
+	        local result = pb.encode("unattended.Parking_car_info",msg)
+        return result
+end
+--获取地铁剩余时间（没写proto）
+s.resp.get_subway_info = function(source,playerid)
+	local msg = {}
+	local subway_time = os.time() - stime
+	msg.subway_time  = subway_time
+	local result = pb.encode("unattended.Subway_time",msg)
+	return result
+end
+--获取火车剩余时间（没写proto）
+s.resp.get_bus_info = function(source,playerid)
+	local msg = {}
+	local msg = {}
+	local bus_time = os.time() - btime
+	msg.bus_time =  bus_time
+	local result  = pb.encode("unattended.Bus_time",msg)
+	return result
+end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- 从传感器获得车位相关数据（还没写proto）
 
-
+s.resp.set_parkinglot_record = function(source,playerid,i,j,value,floor,id,time)
+	handler1:changeMaps(i,j,value)
+	if parking_car[floor] == nil then
+		parking_car[floor] = {}
+	end
+	if parking_car[floor][i] == nil then
+		parking_car[i] = {}
+	end
+	parking_car[floor][i][j][id] = id
+ 	parking_car[floor][i][j][time] = os.time()
+end
 -- 从传感器获得门禁数据输入
 s.resp.set_unattended_visit_record = function(source, playerid, id, monitor_video , kind, in_out)
         if not db then
 		s.connect()
 	end
-	local sql = string.format("insert into visit_record (id, monitor_video, kind,in_out) values (%d,%s,%s,%s)",id,monitor_video,kind,in_out)
+	local sql = string.format("insert into visit_record (id,monitor_video,kind,in_out) values (%d,%s,%s,%s)",id,monitor_video,kind,in_out)
 	local res = db:query(sql)
 	if res.err then
 		print("error:"..res.err)

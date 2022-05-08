@@ -1,0 +1,67 @@
+syntax = "proto2";
+   package smart_live;
+   
+   message get_com_env_record {
+              required int32 id = 1;
+              optional string time = 2;
+              optional int32 temp = 3;
+              optional int32 wet = 4;
+              optional int32 pm_ten = 5;
+             optional int32 pm_tpf = 6;
+  }
+  
+  message get_ten_com_env_records {
+          repeated get_com_env_record records = 1;
+  
+  }
+  
+  message get_temp_total_record {
+          required string time = 1;
+          optional int32 normal = 2;
+          optional int32 abnormal = 3;
+  }
+ 
+  message get_ten_temp_total_records {
+          repeated get_temp_total_record records = 1;
+  }
+ 
+  message get_humantemp_record {
+          required int32 staff_id = 1;
+          optional int32 date  = 2;
+          optional string time = 3;
+          optional int32 temp = 4;
+          optional string place = 5;
+ }
+  
+  message get_elepower_record{
+          required string date = 1;
+          optional int32 day_use = 2;
+          optional int32 week_use = 3;
+          optional int32 month_use = 4;
+          optional int32 year_use = 5;
+  }
+  
+  message get_ten_elepower_records {
+          repeated get_elepower_record records = 1;
+  }
+  
+  message get_waterpower_record {
+          required string date = 1;
+          optional int32 day_use = 2;
+          optional int32 week_use = 3;
+          optional int32 month_use = 4;
+          optional int32 year_use = 5;
+  }
+  
+  message get_ten_waterpower_records {
+          repeated get_waterpower_record records = 1;
+ }
+  
+  message get_garbage_record {
+          required string record_id = 1;
+          optional int32 id  = 2;
+          optional string place = 3;
+	 optional int32 capacity  = 4;
+	 optional int32 clean  = 5;
+	 optional string time  = 6; 	
+}
