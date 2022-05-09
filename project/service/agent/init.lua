@@ -5,6 +5,7 @@ s.gate = nil
 require "scene"
 require "unattended"
 require "smartmanagement"
+require "smartlive"
 function getday(timestamp)
 	local day = (timestamp+3600*8)/(3600*24)
 	return math.ceil(day)

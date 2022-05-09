@@ -57,5 +57,14 @@ skynet.start(function()
                 skynet.name("smartmanagement",srv)
                 skynet.error(smnode)	
 	end
+	
+
+        --smart_live系统开启
+        local slnode = runconfig.smartlive.node
+        if mynode == slnode then
+                local srv = skynet.newservice("smartlive","smartlive",0)
+                skynet.name("smartlive",srv)
+                skynet.error(slnode)    
+        end 
         skynet.exit()
 end)

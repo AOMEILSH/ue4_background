@@ -31,15 +31,16 @@ s.resp.set_com_env = function(source, playerid, id, time, temp,wet, pm_ten, pm_t
 	if not db then
 	 s.connect()
  	end 
-	local sql = string.format("insert into community_environment_record (id, time, temp, wet, pm_ten, pm_tpf) values (%d,'%s','%s','%s',%d)",id, time, temp, wet, pm_ten, pm_tpf)
+	local sql = string.format("insert into community_environment_record (id, time, temp, wet, pm_ten, pm_tpf) values (%d,'%s',%d,%d,%d,%d)",id, time, temp, wet, pm_ten, pm_tpf)
+	print(sql)
 	local res = db:query(sql)
 	if res.err then
 		 print("error:"..res.err)
-	 	 return {"false"}
+	 	 return "false"
 	else
 		print("ok")
 	 end 
-	return {"true"}     
+	return "true"    
 end
 
 
@@ -52,11 +53,11 @@ s.resp.set_humantemp_record = function(source, playerid, staff_id,time,tempature
         local res = db:query(sql)       
         if res.err then
                  print("error:"..res.err)        
-                 return {"false"}
+                 return "false"
         else
                 print("ok")
          end 
-        return {"true"}   	
+        return "true"   	
 end
 
 
@@ -71,11 +72,11 @@ s.resp.set_personnel_mobility_record = function(source, playerid, time,trand)
         local res = db:query(sql)
         if res.err then
                  print("error:"..res.err)
-                 return {"false"}
+                 return "false"
         else
                 print("ok")
          end
-        return {"true"}
+        return "true"
 end
 
 
@@ -88,11 +89,11 @@ s.resp.set_electricity_record = function(source,playerid,date,day_use,week_use,m
         local res = db:query(sql)
         if res.err then
                  print("error:"..res.err)
-                 return {"false"}
+                 return "false"
         else
                 print("ok")
          end 
-        return {"true"}
+        return "true"
 end
 
 
@@ -105,11 +106,11 @@ s.resp.set_water_record = function(source,playerid,date,day_use,week_use,month_u
         local res = db:query(sql)
         if res.err then
                  print("error:"..res.err)
-                 return {"false"}
+                 return "false"
         else
                 print("ok")
          end
-        return {"true"}
+        return "true"
 end
 
 
@@ -123,11 +124,11 @@ s.resp.set_garbage_record = function(source,playerid,record_id,id,capacity,clean
         local res = db:query(sql)
         if res.err then
                  print("error:"..res.err)
-                 return {"false"}
+                 return "false"
         else
                 print("ok")
          end 
-        return {"true"}
+        return "true"
 end
 
 
@@ -143,7 +144,7 @@ s.resp.get_com_env_record = function(source,playerid,id)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-                return {"false"}
+                return "false"
         else
                 print("ok")
         end 
@@ -167,7 +168,7 @@ s.resp.get_ten_com_env_records = function(source,playerid,id)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-                return {"false"}
+                return "false"
         else
                 print("ok")
         end
@@ -197,7 +198,7 @@ s.resp.get_temp_total_record = function(source,playerid)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-                return {"false"}
+                return "false"
         else
                 print("ok")
         end
@@ -218,7 +219,7 @@ s.resp.get_ten_temp_total_records = function(source,playerid)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-                return {"false"}
+                return "false"
         else
                 print("ok")
         end
@@ -249,7 +250,7 @@ s.resp.get_humantemp_record = function(source,playerid,staff_id)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-        	return {"false"}
+        	return "false"
 	else
                 print("ok")
         end
@@ -270,7 +271,7 @@ s.resp.get_elepower_record = function(source,playerid)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-        	return {"false"}
+        	return "false"
 	else
                 print("ok")
         end
@@ -291,7 +292,7 @@ s.resp.get_ten_elepower_records = function(source,playerid)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-        	return {"false"}
+        	return "false"
 	else
                 print("ok")
         end
@@ -320,7 +321,7 @@ s.resp.get_waterpower_record = function(source,playerid)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-        	return {"false"}
+        	return "false"
 	else
                 print("ok")
         end
@@ -341,7 +342,7 @@ s.resp.get_ten_waterpower_records = function(source,playerid)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-        	return {"false"}
+        	return "false"
 	else
                 print("ok")
         end
@@ -372,7 +373,7 @@ s.resp.get_garbage_record = function(source,playerid,record_id)
         local res = db:query(sql)
         if res.err then
                 print("error:"..res.err)
-        	return {"false"}
+        	return "false"
 	else
                 print("ok")
         end 
